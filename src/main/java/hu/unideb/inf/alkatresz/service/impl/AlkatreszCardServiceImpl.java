@@ -45,6 +45,15 @@ public class AlkatreszCardServiceImpl
 
     @Override
     public AlkatreszCardDto getByNev(String nev) {
+        //AlkatreszEntity entity = repo.getByNev(nev);
+        //return modelMapper.map(entity, AlkatreszCardDto.class);
+
+        List<AlkatreszEntity> alkatreszek = repo.findAll();
+        for (AlkatreszEntity entity : alkatreszek) {
+            if (entity.getNev().equals(nev)) {
+                return mapper.map(entity, AlkatreszCardDto.class);
+            }
+        }
         return null;
     }
 

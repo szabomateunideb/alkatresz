@@ -23,4 +23,9 @@ public class AlkatreszCardController {
     public AlkatreszCardDto getById(@RequestParam Long id){
         return service.getById(id);
     }
+
+    @GetMapping("/byNev/{nev}")
+    public AlkatreszCardDto getByNev(@PathVariable String nev){
+        return service.getByNev(nev);
+    }
 }
