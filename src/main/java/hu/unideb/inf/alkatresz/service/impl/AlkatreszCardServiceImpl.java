@@ -38,7 +38,9 @@ public class AlkatreszCardServiceImpl
 
     @Override
     public AlkatreszCardDto getById(Long id) {
-        return null;
+        AlkatreszEntity entity = repo.getReferenceById(id);
+        AlkatreszCardDto dto = mapper.map(entity, AlkatreszCardDto.class);
+        return dto;
     }
 
     @Override

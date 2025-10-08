@@ -2,10 +2,7 @@ package hu.unideb.inf.alkatresz.controller;
 
 import hu.unideb.inf.alkatresz.service.AlkatreszCardService;
 import hu.unideb.inf.alkatresz.service.dto.AlkatreszCardDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/alkatresz")
@@ -20,5 +17,10 @@ public class AlkatreszCardController {
     @PostMapping("/save")
     public AlkatreszCardDto save(@RequestBody AlkatreszCardDto dto){
         return service.save(dto);
+    }
+
+    @GetMapping("/byId")
+    public AlkatreszCardDto getById(@RequestParam Long id){
+        return service.getById(id);
     }
 }

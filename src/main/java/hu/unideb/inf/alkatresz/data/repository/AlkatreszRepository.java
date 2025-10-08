@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlkatreszRepository
         extends JpaRepository<AlkatreszEntity, Long> {
+
+    AlkatreszEntity getByNev(String nev);
 }
