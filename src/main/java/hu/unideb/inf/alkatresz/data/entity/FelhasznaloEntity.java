@@ -34,7 +34,7 @@ public class FelhasznaloEntity implements UserDetails {
     @OneToMany(mappedBy = "felhasznalo")
     private List<MentesEntity> mentesek;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<JogosultsagEntity> jogosultsagok;
 
     @Override
