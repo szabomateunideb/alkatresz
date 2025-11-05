@@ -6,5 +6,5 @@ import hu.unideb.inf.alkatresz.service.dto.RegisztracioDto;
 public interface AuthService {
 
     public void regisztracio(RegisztracioDto dto);
-    public void bejelentkezes(BejelentkezesDto dto);
+    public String bejelentkezes(BejelentkezesDto dto);
 }

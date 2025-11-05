@@ -5,6 +5,7 @@ import hu.unideb.inf.alkatresz.data.entity.JogosultsagEntity;
 import hu.unideb.inf.alkatresz.data.repository.FelhasznaloRepository;
 import hu.unideb.inf.alkatresz.data.repository.JogosultsagRepository;
 import hu.unideb.inf.alkatresz.service.AuthService;
+import hu.unideb.inf.alkatresz.service.TokenService;
 import hu.unideb.inf.alkatresz.service.dto.BejelentkezesDto;
 import hu.unideb.inf.alkatresz.service.dto.RegisztracioDto;
 import hu.unideb.inf.alkatresz.service.mapper.FelhasznaloMapper;
@@ -14,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private final FelhasznaloMapper felhMapper;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
 
 
     @Override
@@ -47,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void bejelentkezes(BejelentkezesDto dto) {
+    public String bejelentkezes(BejelentkezesDto dto) {
         SecurityContext context =
                 SecurityContextHolder.createEmptyContext();
         Authentication auth = authManager.authenticate(
@@ -58,6 +61,10 @@ public class AuthServiceImpl implements AuthService {
         );
         context.setAuthentication(auth);
         SecurityContextHolder.setContext(context);
+
+        UserDetails user = felhRepo
+                .findByFelhasznalonev(dto.getFelhasznalonev());
+        return tokenService.generateToken(user);
 
     }
 }

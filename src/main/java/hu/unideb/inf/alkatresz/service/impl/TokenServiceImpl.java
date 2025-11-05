@@ -34,7 +34,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     private SecretKey getKey(){
-        byte[] keyBytes = Decoders.BASE64.decode("fdreoipőfdruzoieds9oiöitrzuioujz7uzt7tuzujzguzgjzg");
+        byte[] keyBytes = Decoders.BASE64.decode("fdreoipfdruzoieds9oiitrzuioujz7uzt7tuzujzguzgjzg");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
