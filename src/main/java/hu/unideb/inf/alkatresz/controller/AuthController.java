@@ -3,11 +3,14 @@ package hu.unideb.inf.alkatresz.controller;
 import hu.unideb.inf.alkatresz.service.AuthService;
 import hu.unideb.inf.alkatresz.service.dto.BejelentkezesDto;
 import hu.unideb.inf.alkatresz.service.dto.RegisztracioDto;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
+@Validated
 public class AuthController {
 
     private final AuthService authService;
@@ -17,7 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/regisztracio")
-    public void regisztracio(@RequestBody RegisztracioDto dto) {
+    public void regisztracio(@RequestBody @Valid RegisztracioDto dto) {
         authService.regisztracio(dto);
     }
 
