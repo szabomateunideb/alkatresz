@@ -3,10 +3,8 @@ package hu.unideb.inf.alkatresz.controller;
 import hu.unideb.inf.alkatresz.service.AuthService;
 import hu.unideb.inf.alkatresz.service.dto.BejelentkezesDto;
 import hu.unideb.inf.alkatresz.service.dto.RegisztracioDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
@@ -26,5 +24,10 @@ public class AuthController {
     @PostMapping("/bejelentkezes")
     public String bejelentkezes(@RequestBody BejelentkezesDto dto) {
         return authService.bejelentkezes(dto);
+    }
+
+    @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> options(){
+        return ResponseEntity.ok().build();
     }
 }
